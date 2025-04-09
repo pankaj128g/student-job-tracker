@@ -30,8 +30,18 @@ app.delete("/api/jobs/:id", async (req, res) => {
   res.json({ message: "Deleted" });
 });
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
-  app.listen(process.env.PORT || 5000, () => {
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  tls: true,
+  tlsAllowInvalidCertificates: false
+})
+.then(() => console.log("✅ MongoDB Connected"))
+.catch((err) => console.error("❌ MongoDB connection error:", err));
+
+
+// mongoose.connect(process.env.MONGO_URI).then(() => {
+  // app.listen(process.env.PORT || 5000, () => {
     console.log("Server started");
-  });
-});
+  //});
+//});

@@ -4,20 +4,20 @@
     "description": "Backend for Student Job Tracker",
     "main": "index.js",
     "scripts": {
-      "start": "node index.js",
-      "dev": "nodemon index.js"
+        "start": "node index.js",
+        "dev": "nodemon index.js"
     },
     "keywords": [],
     "author": "pankaj128g",
     "license": "ISC",
     "dependencies": {
-      "cors": "^2.8.5",
-      "dotenv": "^16.0.3",
-      "express": "^4.18.2",
-      "mongoose": "^7.0.3"
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "mongodb": "^6.15.0",
+        "mongoose": "^7.0.3"
     },
     "devDependencies": {
-      "nodemon": "^2.0.22"
+        "nodemon": "^2.0.22"
     }
-  }
-  
+}

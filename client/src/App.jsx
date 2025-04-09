@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function App() {
   const [jobs, setJobs] = useState([]);
   const [form, setForm] = useState({ company: "", role: "", status: "Applied", appliedDate: "", link: "" });
 
   const fetchJobs = async () => {
-    const res = await axios.get('https://your-backend-url/api/jobs');
+    const res = await axios.get(`${backendUrl}/api/jobs`);
     setJobs(res.data);
   };
 
@@ -14,18 +16,18 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('https://your-backend-url/api/jobs', form);
+    await axios.post(`${backendUrl}/api/jobs`, form);
     setForm({ company: "", role: "", status: "Applied", appliedDate: "", link: "" });
     fetchJobs();
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`https://your-backend-url/api/jobs/${id}`);
+    await axios.delete(`${backendUrl}/api/jobs/${id}`);
     fetchJobs();
   };
 
   const handleStatusUpdate = async (id, newStatus) => {
-    await axios.put(`https://your-backend-url/api/jobs/${id}`, { status: newStatus });
+    await axios.put(`${backendUrl}/api/jobs/${id}`, { status: newStatus });
     fetchJobs();
   };
 

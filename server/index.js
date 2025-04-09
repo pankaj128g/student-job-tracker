@@ -6,6 +6,8 @@ const cors = require("cors");
 const Job = require("./models/Job");
 
 const app = express();
+const port = process.env.PORT || 5000;
+
 app.use(cors());
 app.use(express.json());
 
@@ -30,18 +32,17 @@ app.delete("/api/jobs/:id", async (req, res) => {
   res.json({ message: "Deleted" });
 });
 
+// ✅ Only start the server after MongoDB connects
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   tls: true,
   tlsAllowInvalidCertificates: false
 })
-.then(() => console.log("✅ MongoDB Connected"))
+.then(() => {
+  console.log("✅ MongoDB Connected");
+  app.listen(port, () => {
+    console.log(`✅ Server running on port ${port}`);
+  });
+})
 .catch((err) => console.error("❌ MongoDB connection error:", err));
-
-
-// mongoose.connect(process.env.MONGO_URI).then(() => {
-  // app.listen(process.env.PORT || 5000, () => {
-    console.log("Server started");
-  //});
-//});
